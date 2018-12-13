@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Solution {
 
@@ -168,6 +167,50 @@ public class Solution {
         }
         ans[length] = left;
         return ans;
+    }
+
+    // 728. Self Dividing Numbers
+    // https://leetcode.com/problems/self-dividing-numbers/
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i = left; i <= right; i++){
+            if(isSelfDividingNumber(i))
+                list.add(i);
+        }
+        return list;
+    }
+    private boolean isSelfDividingNumber(int number){
+        int remain = number, last;
+        while (remain > 0){
+            last = remain % 10;
+            if(last == 0)
+                return false;
+            if(number % last != 0)
+                return false;
+            remain /= 10;
+        }
+        return true;
+    }
+
+    // 852. Peak Index in a Mountain Array
+    // https://leetcode.com/problems/peak-index-in-a-mountain-array/
+    public int peakIndexInMountainArray(int[] A) {
+        for(int i = 1; i < A.length; i++){
+            if(A[i] < A[i-1])
+                return i-1;
+        }
+        return 0;
+    }
+
+    // 561. Array Partition I
+    // https://leetcode.com/problems/array-partition-i/
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int sum = 0;
+        for(int i = 0; i < nums.length; i += 2){
+            sum += nums[i];
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
